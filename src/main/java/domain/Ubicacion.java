@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Ubicacion implements Serializable{
 	
-
+	/*	Gustavo Cardozo		*/
 	private static final long serialVersionUID = -2145089024177400506L;
 	
 	private Long id;
