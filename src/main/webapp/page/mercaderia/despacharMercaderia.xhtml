@@ -1,0 +1,134 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Despachar Mercaderia</title>
+</h:head>
+
+<h:body>
+	<p:layout fullPage="true" id="layout-principal">
+		<p:layoutUnit position="center">
+
+	<h:form id="mercaderiaListMsgForm">
+					<p:messages autoUpdate="false" id="mercaderiaListMsg"
+						styleClass="msgErrorList" showDetail="false" showSummary="true"
+						closable="true" />
+	</h:form>
+				
+	<h:form id="mercaderiaListForm">
+		<p:panel id="mercaderiaDataTablePanel" widgetVar="mercaderiaDataTablePanel"
+			closable="true" toggleable="true" closeSpeed="0"
+			styleClass="sin-border">
+			
+			
+			<p:outputLabel value="Despachar Mercaderia"/>
+			<br/>
+			
+			<p:dataTable id="mercaderiaDataTable" widgetVar="mercaderiaDataTableVar"
+				var="mercaderia" value="#{despacharMercaderiController.mercaderias}"
+				paginatorAlwaysVisible="true" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} 
+					{PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15,20,25,50,100" rows="10"
+				resizableColumns="true"
+				selectionMode="single" selection="#{despacharMercaderiController.mercaderia}"
+				lazy="false" stickyHeader="false"
+				emptyMessage="#{msg['msg.compound.noDataFound']}"
+				rowKey="#{mercaderia.id}"
+				scrollable="true" scrollWidth="100%" scrollHeight="100%"
+				styleClass="" >
+
+				<f:facet name="header">
+					<table class="no-border-table dis-table-header">
+						<tr>
+							<td>
+									
+								<p:commandButton id="removemercaderia"
+									styleClass="Fleft LightButton" icon="ui-icon-transferthick-e-w"
+									process="@this" disabled="#{despacharMercaderiController.disabledDespachar}"
+									actionListener="#{despacharMercaderiController.despachar}"
+									title="Despachar mercaderia"/>
+									
+							</td>
+							<td class="ui-datatable ui-datatable-header"><h:outputText
+									value="#{msg['msg.security.datatable.title.mercaderia']}" /></td>
+							<td></td>
+						</tr>
+					</table>
+				</f:facet>
+
+				<p:ajax event="rowSelect" update="removemercaderia" />
+				<p:ajax event="rowUnselect" update="removemercaderia" />
+
+				<!-- Identificar -->
+				<p:column headerText="Identificar" sortBy="#{mercaderia.id}"  
+							filterBy="#{mercaderia.id}" filterMatchMode="contains">
+					<h:outputText value="#{mercaderia.id}" />
+				</p:column>
+
+				<!-- Cantidad -->
+				<p:column headerText="Cantidad de Bultos"	sortBy="#{mercaderia.bultos}"  
+					  filterBy="#{mercaderia.bultos}" filterMatchMode="contains">
+					<h:outputText value="#{mercaderia.bultos}" />
+				</p:column>
+				
+				<!-- Proveedor -->
+				<p:column headerText="Proveedor" filterBy="#{mercaderia.proveedorName}" filterMatchMode="contains">
+					<h:outputText value="#{mercaderia.proveedorName}" />
+				</p:column>
+				
+				<!-- Usuario -->
+				<p:column headerText="Ubicador"  filterBy="#{mercaderia.userName}" filterMatchMode="contains">
+					<h:outputText value="#{mercaderia.userName}" />
+				</p:column>
+				
+				<!-- Fecha ingreso -->
+				<p:column headerText="Fecha ingreso" sortBy="#{mercaderia.fechaIngreso}"   
+					filterBy="#{mercaderia.fechaIngreso}" filterMatchMode="contains">
+					<h:outputText value="#{mercaderia.fechaIngreso}" />
+				</p:column>
+				
+								
+				<!-- Fecha Despacho -->
+				<p:column headerText="Fecha Despacho" filterBy="#{mercaderia.fechaEgreso}" filterMatchMode="contains">
+					<h:outputText value="#{mercaderia.fechaEgreso}" />
+				</p:column>
+				
+				<!-- NAME -->
+				<p:column headerText="Identificador Zona" filterBy="#{mercaderia.zona.id}" filterMatchMode="contains">
+					<h:outputText value="#{mercaderia.zona.id}" />
+				</p:column>
+
+				<!-- capacidad -->
+				<p:column headerText="Nombre de Zona" filterBy="#{mercaderia.zona.nombre}" filterMatchMode="contains">
+					<h:outputText value="#{mercaderia.zona.nombre}" />
+				</p:column>
+
+				<!-- categoria -->
+				<p:column headerText="Categoria" filterBy="#{mercaderia.categoria}" filterMatchMode="contains">
+					<h:outputText value="#{mercaderia.categoria}" />
+				</p:column>
+				
+				<!-- peso -->
+				<p:column headerText="Peso" filterBy="#{mercaderia.peso}" filterMatchMode="contains">
+					<h:outputText value="#{mercaderia.peso}" />
+				</p:column>
+
+				<!-- temperatura -->
+				<p:column headerText="Temperatura" filterBy="#{mercaderia.temperatura}" filterMatchMode="contains">
+					<h:outputText value="#{mercaderia.temperatura}" />
+				</p:column>
+
+			</p:dataTable>
+			
+			
+			<p:commandButton id="volverIndex" action="home" process="@this" value="Inicio" />
+			
+		</p:panel>
+	</h:form>
+</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>

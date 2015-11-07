@@ -1,0 +1,53 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Inicio</title>
+	<link rel="stylesheet" href="/navegacionAlemana/css/login.css"
+		type="text/css" />
+	<link rel="stylesheet" href="/navegacionAlemana/css/index.css"
+		type="text/css" />
+</h:head>
+
+<h:body>
+	<p:layout fullPage="true" id="layout-principal">
+		<p:layoutUnit position="center">
+
+			<p:panel styleClass="sin-border">
+				<h:form>
+				
+					<p:menuButton value="#{loginController.username}" styleClass="menuButtonUser">
+				        <p:menuitem value="Salir" actionListener="#{logoutController.submit}" icon="ui-icon-disk"/>
+				    </p:menuButton>
+
+				</h:form>
+			</p:panel>
+
+
+			<p:panel  styleClass="sin-border centrado">
+				<p:outputLabel value="Inicio" />
+				<br/>
+				<br/>
+
+				<p:panelGrid columns="1" styleClass="centrar-table">
+
+					<p:commandButton value="Ir a Usuarios"
+					action="userList" process="@this" />
+					
+					<p:commandButton value="Ir a Zonas"
+					action="zonaList" process="@this" />
+					
+					<p:commandButton value="Ir a Ubicar Mercaderia" 
+					action="#{ubicarMercaderiaController.load}" process="@this"/>
+					
+					<p:commandButton value="Ir a Despachar Mercaderia" 
+					action="despachar" process="@this"/>
+
+				</p:panelGrid>
+			</p:panel>
+		</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>

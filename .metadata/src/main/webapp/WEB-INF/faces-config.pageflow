@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14450025083600" configfile="/navegacionAlemana/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="754" id="pf14450025463931" referenceLink="//@navigationRule.6/@fromViewId|" outlinks="pf14450025463942 pf14450025617034 pf14452623443031 pf14452653558493 pf14459580289756 pf14459580289757 pf14464857517593" path="/*"/>
+  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="338" y="178" id="pf14450025463943" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14450025463942" path="login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="338" y="562" id="pf14450025617035" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf14450025617034" path="index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="page/user/userList.xhtml" x="338" y="946" id="pf14452623443032" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf14452623443031" path="page/user/userList.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="page/user/crudUser.xhtml" x="338" y="1330" id="pf14452653558504" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" inlinks="pf14452653558493" path="page/user/crudUser.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="page/zona/zonaList.xhtml" id="pf14459580289758" referenceLink="//@navigationRule.4/@navigationCase.0/@toViewId|" inlinks="pf14459580289756" path="page/zona/zonaList.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="page/zona/crudZona.xhtml" id="pf14459580289759" referenceLink="//@navigationRule.5/@navigationCase.0/@toViewId|" inlinks="pf14459580289757" path="page/zona/crudZona.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="page/mercaderia/despacharMercaderia.xhtml" id="pf14464857517604" referenceLink="//@navigationRule.6/@navigationCase.0/@toViewId|" inlinks="pf14464857517593" path="page/mercaderia/despacharMercaderia.xhtml"/>
+  <links id="pf14450025463942" target="pf14450025463943" source="pf14450025463931" outcome="login" redirect="true"/>
+  <links id="pf14450025617034" target="pf14450025617035" source="pf14450025463931" outcome="home" redirect="true"/>
+  <links id="pf14452623443031" target="pf14452623443032" source="pf14450025463931" outcome="userList" redirect="true"/>
+  <links id="pf14452653558493" target="pf14452653558504" source="pf14450025463931" outcome="crudUser" redirect="true"/>
+  <links id="pf14459580289756" target="pf14459580289758" source="pf14450025463931" outcome="zonaList" redirect="true"/>
+  <links id="pf14459580289757" target="pf14459580289759" source="pf14450025463931" outcome="crudZona" redirect="true"/>
+  <links id="pf14464857517593" target="pf14464857517604" source="pf14450025463931" outcome="despachar" redirect="true"/>
+</pageflow:Pageflow>

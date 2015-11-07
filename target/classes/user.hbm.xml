@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="domain.User" table="USER">
+		
+		<id name="id" column="USER_ID" type="java.lang.Long">
+			<generator class="native" />
+		</id>
+		
+		<property name="nombre" column="nombre" type="java.lang.String"/>
+		<property name="apellido" column="apellido" type="java.lang.String"/>
+		<property name="userName" column="userName" type="java.lang.String"
+		not-null="true" unique="true"/>
+		<property name="password" column="password" type="java.lang.String"/>		
+		<property name="dni" column="dni" type="java.lang.Integer"/>
+		<property name="direccion" column="direccion" type="java.lang.String"/>
+	
+		<property name="fechaIngreso" column="FECHA_INGRESO" type="java.util.Date" />
+		<property name="fechaEgreso" column="FECHA_EGRESO" type="java.util.Date" />
+		<property name="fechaNac" column="FECHA_NAC" type="java.util.Date" />
+		
+				<property name="estado" type="org.hibernate.type.NumericBooleanType"/>
+		
+		<property name="tipoUsuario" column="TIPO_USUARIO" not-null="true">
+			<type name="org.hibernate.type.EnumType">
+
+				<param name="enumClass">domain.User$TIPO_USUARIO</param>
+				<param name="type">12</param>
+				<param name="useNamed">true</param>
+			</type>
+		</property>
+	
+	</class>	
+</hibernate-mapping>

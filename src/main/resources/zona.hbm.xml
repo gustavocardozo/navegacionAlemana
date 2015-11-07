@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="domain.Zona" table="zona">
+		
+		<id name="id" column="ZONA_ID" type="java.lang.Long">
+			<generator class="org.hibernate.id.enhanced.SequenceStyleGenerator"> 
+            	<param name="sequence_name">ZONAID_SEQUENCE</param>
+            	<param name="optimizer">none</param>
+            	<param name="increment_size">1</param> 
+         	</generator>
+			<!-- <generator class="native" /> -->
+		</id>
+		
+		<property name="nombre" column="NOMBRE" type="java.lang.String"/>
+		<property name="estado" type="org.hibernate.type.NumericBooleanType"/>
+		
+		<property name="categoria" column="CATEGORIA" not-null="true">
+			<type name="org.hibernate.type.EnumType">
+
+				<param name="enumClass">domain.Zona$TIPO_CATEGORIA</param>
+				<param name="type">12</param>
+				<param name="useNamed">true</param>
+			</type>
+		</property>
+
+		<property name="temperatura" column="TEMPERATURA" not-null="true">
+			<type name="org.hibernate.type.EnumType">
+
+				<param name="enumClass">domain.Zona$TIPO_TEMPERATURA</param>
+				<param name="type">12</param>
+				<param name="useNamed">true</param>
+			</type>
+		</property>
+		
+		<property name="peso" column="PESO" not-null="true">
+			<type name="org.hibernate.type.EnumType">
+
+				<param name="enumClass">domain.Zona$TIPO_PESO</param>
+				<param name="type">12</param>
+				<param name="useNamed">true</param>
+			</type>
+		</property>
+				
+		<property name="capacidad" column="CAPACIDAD" type="java.lang.Integer"/>
+		
+		
+	<list name="ubicaciones"  cascade="all"  lazy="false"  >
+         
+         <key column="zona_id"/>
+         <index column="Idx"/>
+         <one-to-many class="domain.Ubicacion" />
+     </list>
+	
+	
+	</class>	
+</hibernate-mapping>

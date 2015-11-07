@@ -1,0 +1,145 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Usuario</title>
+</h:head>
+
+<h:body>
+	<p:layout fullPage="true" id="layout-principal">
+	
+		<p:layoutUnit position="center">
+
+		<p:panel id="userCRUDPanel" widgetVar="userCRUDPanel"
+		toggleSpeed="0" closeSpeed="0" styleClass="panelCRUD">
+
+		<p:tabView id="userCRUDTabView" styleClass="crubs-tabView">
+			<p:tab id="userCRUDTab" title="Usuario">
+
+				<h:form id="userCRUDMsgForm">
+					<p:messages autoUpdate="false" id="userCRUDMsg"
+						styleClass="msgErrorCRUD" showDetail="false" showSummary="true"
+						closable="true" />
+				</h:form>
+
+				<h:form id="userCRUDForm">
+
+					<p:panelGrid columns="4" id="userCRUDData"
+						styleClass="transparent retbam-no-border">
+
+						<p:outputLabel value="Nombre de Usuario"
+							for="inputUsername" />
+						<p:inputText maxlength="30" id="inputUsername" required="true"
+							value="#{userController.userCRUD.userName}"
+							styleClass="cruds-input" validatorMessage="Solo letras">
+							
+							<f:validateRegex pattern="[a-zA-Z]+" />
+						</p:inputText>
+
+						<p:outputLabel value="Nombre" for="inputNombre" />
+						<p:inputText maxlength="30" id="inputNombre" required="true"
+							value="#{userController.userCRUD.nombre}" styleClass="cruds-input">
+						</p:inputText>
+						
+						<p:outputLabel value="Apellido"
+							for="inputFirstname" />
+						<p:inputText maxlength="30" id="inputFirstname" required="true"
+							value="#{userController.userCRUD.apellido}"
+							styleClass="cruds-input">
+						</p:inputText>
+
+						<p:outputLabel value="DNI"
+							for="inputDNI" />
+						<p:inputText maxlength="8" id="inputDNI" required="true"
+							value="#{userController.userCRUD.dni}"
+							styleClass="cruds-input">
+							<f:validateLength minimum="7" maximum="8" />
+							<f:convertNumber integerOnly="true" />
+						</p:inputText>
+
+						<p:panel rendered="#{!userController.editor}">
+							<p:outputLabel for="userPassword"
+								value="Password"/>
+							<p:inputText maxlength="30" id="userPassword" required="true"
+								value="#{userController.userCRUD.password}" styleClass="cruds-input"
+								type="password">
+							</p:inputText>
+							
+						</p:panel>
+						
+						<p:panel rendered="#{userController.editor}">
+							<p:panelGrid columns="4">
+							
+								<p:outputLabel for="userPasswordEditor"
+									value="Password"/>
+								<p:inputText maxlength="30" id="userPasswordEditor" required="#{userController.editarPassword}"
+									value="#{userController.userCRUD.password}" styleClass="cruds-input"
+									disabled="#{!userController.editarPassword}"
+									type="password">
+								</p:inputText>
+								
+								<p:outputLabel for="userSwitchEditor" value="Editar" />
+								<p:inputSwitch id="userSwitchEditor" onLabel="Si" offLabel="NO"
+							 		value="#{userController.editarPassword}" >
+							 		<p:ajax process="@this" update="userCRUDTabView:userCRUDForm:userPasswordEditor"/>
+							 	</p:inputSwitch>
+														
+							</p:panelGrid>						
+						</p:panel>
+
+						<p:outputLabel value=""/>
+						
+						<p:outputLabel for="userDireccion"
+							value="Direccion"/>
+						<p:inputText maxlength="255" id="userDireccion" required="true"
+							value="#{userController.userCRUD.direccion}" styleClass="cruds-input">
+						</p:inputText>
+
+						<p:outputLabel for="userFechaNac"
+							value="Fecha Nacimiento"/>
+						<p:calendar id="userFechaNac" required="true"
+						value="#{userController.userCRUD.fechaNac}"/>
+
+						
+						<p:outputLabel for="tipoUsuario" value="Tipo de Usuario" />
+				        <p:selectOneMenu id="tipoUsuario" value="#{userController.tipoUsuario}"
+				         style="width:125px" required="true" >
+				         	
+				         	<p:ajax event="change" process="@this" />
+				         	
+				            <f:selectItem itemLabel="Seleccione" itemValue="#{null}" />
+				            <f:selectItems value="#{userController.tipoUsuerioList}"/>
+				        </p:selectOneMenu>
+						
+						<p:outputLabel for="estadoUsuario" value="Estado" />
+						<p:inputSwitch id="estadoUsuario" onLabel="Si" offLabel="NO"
+						 value="#{userController.userCRUD.estado}" />
+ 
+					</p:panelGrid>
+
+					<div>
+						<p:commandButton value="Guardar"
+							id="acceptUserBtn" action="#{userController.save}" icon="ui-icon-check"
+							update="@form :userCRUDTabView:userCRUDMsgForm:userCRUDMsg">
+						</p:commandButton>
+
+						<p:commandButton value="Cancel" 
+							update="" id="cancelUserBtn" process="@this"
+							icon="ui-icon-cancel" action="#{userController.cancel}">
+							<p:resetInput target="" />
+						</p:commandButton>
+					</div>
+
+				</h:form>
+
+			</p:tab>
+		</p:tabView>
+
+
+	</p:panel>
+</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>

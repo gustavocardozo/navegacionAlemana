@@ -1,0 +1,118 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Ubicar Mercaderia</title>
+</h:head>
+
+<h:body>
+	<p:layout fullPage="true" id="layout-principal">
+	
+		<p:layoutUnit position="center">
+
+		<p:panel id="ubicarMercaderiaCRUDPanel" widgetVar="ubicarMercaderiaCRUDPanel"
+		toggleSpeed="0" closeSpeed="0" styleClass="panelCRUD">
+
+		<p:tabView id="ubicarMercaderiaCRUDTabView" styleClass="crubs-tabView">
+			<p:tab id="ubicarMercaderiaCRUDTab" title="Ubicar mercaderia">
+
+				<h:form id="ubicarMercaderiaCRUDMsgForm">
+					<p:messages autoUpdate="false" id="ubicarMercaderiaCRUDMsg"
+						styleClass="msgErrorCRUD" showDetail="false" showSummary="true"
+						closable="true" />
+				</h:form>
+
+				<h:form id="ubicarMercaderiaCRUDForm">
+
+					<p:panelGrid columns="4" id="ubicarMercaderiaCRUDData"
+						styleClass="transparent retbam-no-border">
+
+							
+	
+							<p:outputLabel value="Descripción" for="descripción" />
+							<p:inputText maxlength="30" id="descripción" required="true"
+								value="#{ubicarMercaderiaController.desProducto}" styleClass="cruds-input">
+							</p:inputText>
+							
+							<p:outputLabel value="Remito" for="remito" />
+							<p:inputText maxlength="30" id="remito" required="false"
+								value="#{ubicarMercaderiaController.remito}" styleClass="cruds-input">
+								<f:convertNumber integerOnly="true" />
+							</p:inputText>
+							
+							<p:outputLabel value="Bultos" for="bulto" />
+							<p:inputText maxlength="30" id="bulto" required="true"
+								value="#{ubicarMercaderiaController.cantidad}" styleClass="cruds-input">
+								<f:convertNumber integerOnly="true" />
+								<f:validateLength minimum="1" maximum="5" />
+							</p:inputText>
+							
+							<p:outputLabel for="proveedor" value="Proveedor" />
+				        	<p:selectOneMenu id="proveedor" value="#{ubicarMercaderiaController.proveedorString}"
+				         	style="width:125px" required="true" >
+				         	
+				         		<p:ajax event="change" process="@this" />
+				         	
+				            	<f:selectItem itemLabel="Seleccione" itemValue="#{null}" />
+				            	<f:selectItems value="#{ubicarMercaderiaController.provedoresLista}"/>
+				        	</p:selectOneMenu>
+				        	
+							
+							<p:outputLabel for="categoria" value="Categoria" />
+				        	<p:selectOneMenu id="categoria" value="#{ubicarMercaderiaController.categoria}"
+				         	style="width:125px" required="true" >
+				         	
+				         		<p:ajax event="change" process="@this" />
+				         	
+				            	<f:selectItem itemLabel="Seleccione" itemValue="#{null}" />
+				            	<f:selectItems value="#{ubicarMercaderiaController.categorias}"/>
+				        	</p:selectOneMenu>
+				        	
+				        	<p:outputLabel for="peso" value="Peso" />
+				        	<p:selectOneMenu id="peso" value="#{ubicarMercaderiaController.peso}"
+				         	style="width:125px" required="true" >
+				         	
+				         		<p:ajax event="change" process="@this" />
+				         	
+				            	<f:selectItem itemLabel="Seleccione" itemValue="#{null}" />
+				            	<f:selectItems value="#{ubicarMercaderiaController.pesos}"/>
+				        	</p:selectOneMenu>
+				        	
+				        	<p:outputLabel for="temperatura" value="Temperaturas" />
+				        	<p:selectOneMenu id="temperatura" value="#{ubicarMercaderiaController.temperatura}"
+				         	style="width:125px" required="true" >
+				         	
+				         		<p:ajax event="change" process="@this" />
+				         	
+				            	<f:selectItem itemLabel="Seleccione" itemValue="#{null}" />
+				            	<f:selectItems value="#{ubicarMercaderiaController.temperaturas}"/>
+				        	</p:selectOneMenu>
+				        
+					</p:panelGrid>
+
+					<div>
+						<p:commandButton value="Guardar"
+							id="ubicarMercaderiaBtn" action="#{ubicarMercaderiaController.add}" icon="ui-icon-check"
+							update="@form :ubicarMercaderiaCRUDTabView:ubicarMercaderiaCRUDMsgForm:ubicarMercaderiaCRUDMsg">
+						</p:commandButton>
+
+						<p:commandButton value="Cancel" 
+							update="" id="cancelubicarMercaderiaBtn" process="@this"
+							icon="ui-icon-cancel" action="home">
+							<p:resetInput target="" />
+						</p:commandButton>
+					</div>
+
+				</h:form>
+
+			</p:tab>
+		</p:tabView>
+
+
+	</p:panel>
+</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>

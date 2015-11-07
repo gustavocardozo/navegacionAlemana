@@ -1,0 +1,60 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Ingreso</title>
+	<link rel="stylesheet" href="/navegacionAlemana/css/login.css" type="text/css" />
+</h:head>
+
+<h:body>
+	<p:layout fullPage="true" id="layout-principal">
+		<p:layoutUnit position="center">
+		
+			<p:focus />
+			<h:form id="loginForm">
+			
+				<p:messages id="loginMessages" showSummary="true" autoUpdate="true" />
+
+					<p:panel id="panel-login" styleClass="panel-login">
+					
+						<p:outputLabel value="Ingreso" />
+						<br/>
+						<br/>
+						<br/>
+						<p:panelGrid columns="2" cellpadding="5" styleClass="panelGrid">
+							
+							<p:outputLabel for="username" value="Nombre de Usuario">
+							</p:outputLabel>
+							<p:inputText id="username" required="true"
+							value="#{loginController.username}"
+								placeholder="Nombre de Usuario"
+								label="Nombre de Usuario"/>
+
+							
+							<p:outputLabel for="password" value="Contraseña">
+							</p:outputLabel>
+							<p:password id="password" required="true"
+							value="#{loginController.password}"
+								placeholder="Contraseña" feedback="false"
+								label="Contraseña"/>
+		
+						</p:panelGrid>
+							<br/>
+							<br/>
+							<br/>
+							<!-- LOGIN BUTTON -->
+							<p:commandButton id="loginButton"
+								value="Ingresar"
+								process="@form"
+								update="@form"
+								action="#{loginController.submit}">
+							</p:commandButton>
+					</p:panel>
+
+			</h:form>
+		</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="domain.Mercaderia" table="MERCADERIA">
+		
+		
+		<id name="id" type="java.lang.Integer">
+			<column name="MERCADERIA_ID" />
+			<generator class="foreign">
+				<param name="property">ubicacion</param>
+			</generator>
+		</id>
+		
+		<property name="userName" column="USERNAME" type="java.lang.String"/>
+		<property name="proveedorName" column="PROVEEDORNAME" type="java.lang.String"/>
+				
+		<property name="remito" column="REMITO" type="java.lang.Integer"/>
+		<property name="descripcion" column="DESCRIPCION" type="java.lang.String"/>
+		
+		
+		<one-to-one name="ubicacion" class="domain.Ubicacion"
+			constrained="true"></one-to-one>
+			
+		<property name="fechaIngreso" column="FECHA_INGRESO" type="java.util.Date" />
+		<property name="fechaEgreso" column="FECHA_EGRESO" type="java.util.Date" />
+	
+	</class>	
+</hibernate-mapping>

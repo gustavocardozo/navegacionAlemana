@@ -1,0 +1,111 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Zona</title>
+</h:head>
+
+<h:body>
+	<p:layout fullPage="true" id="layout-principal">
+	
+		<p:layoutUnit position="center">
+
+		<p:panel id="zonaCRUDPanel" widgetVar="zonaCRUDPanel"
+		toggleSpeed="0" closeSpeed="0" styleClass="panelCRUD">
+
+		<p:tabView id="zonaCRUDTabView" styleClass="crubs-tabView">
+			<p:tab id="zonaCRUDTab" title="Zona">
+
+				<h:form id="zonaCRUDMsgForm">
+					<p:messages autoUpdate="false" id="zonaCRUDMsg"
+						styleClass="msgErrorCRUD" showDetail="false" showSummary="true"
+						closable="true" />
+				</h:form>
+
+				<h:form id="zonaCRUDForm">
+
+					<p:panelGrid columns="4" id="zonaCRUDData"
+						styleClass="transparent retbam-no-border">
+
+						<p:outputLabel value="Nombre de Zona"
+							for="inputZonaname" />
+						<p:inputText maxlength="30" id="inputZonaname" required="true"
+							value="#{zonaController.zonaCRUD.nombre}"
+							styleClass="cruds-input" validatorMessage="Solo letras">
+							
+							<f:validateRegex pattern="[a-zA-Z]+" />
+						</p:inputText>
+
+						<p:outputLabel value="Capacidad"
+							for="inputCapacidad" />
+						<p:inputText maxlength="8" id="inputCapacidad" required="true"
+							value="#{zonaController.zonaCRUD.capacidad}"
+							styleClass="cruds-input">
+							<f:validateLength minimum="2" maximum="8" />
+							<f:convertNumber integerOnly="true" />
+						</p:inputText>
+
+						
+						<p:outputLabel for="categoria" value="Tipo de Categoria" />
+				        <p:selectOneMenu id="categoria" value="#{zonaController.categoria}"
+				         style="width:125px" required="true" >
+				         	<p:ajax event="change" process="@this" />
+				         	
+				            <f:selectItem itemLabel="Seleccione" itemValue="#{null}" />
+				            <f:selectItems value="#{zonaController.categoriaList}"/>
+				        </p:selectOneMenu>
+				        
+				        
+						<p:outputLabel for="peso" value="Tipo de Peso" />
+				        <p:selectOneMenu id="peso" value="#{zonaController.peso}"
+				         style="width:125px" required="true" >
+				         	
+				         	<p:ajax event="change" process="@this" />
+				         	
+				            <f:selectItem itemLabel="Seleccione" itemValue="#{null}" />
+				            <f:selectItems value="#{zonaController.pesoList}"/>
+				        </p:selectOneMenu>
+				       
+				        
+						<p:outputLabel for="temperatura" value="Tipo de Temperatura" />
+				        <p:selectOneMenu id="temperatura" value="#{zonaController.temperatura}"
+				         style="width:125px" required="true" >
+				         	
+				         	<p:ajax event="change" process="@this" />
+				         	
+				            <f:selectItem itemLabel="Seleccione" itemValue="#{null}" />
+				            <f:selectItems value="#{zonaController.temperaturaList}"/>
+				        </p:selectOneMenu>
+						
+						<p:outputLabel for="estado" value="Estado" />
+						<p:inputSwitch id="estado" onLabel="Si" offLabel="NO"
+						 value="#{zonaController.zonaCRUD.estado}" />
+ 
+					</p:panelGrid>
+
+					<div>
+						<p:commandButton value="Guardar"
+							id="acceptZonaBtn" action="#{zonaController.save}" icon="ui-icon-check"
+							update="@form :zonaCRUDTabView:zonaCRUDMsgForm:zonaCRUDMsg">
+						</p:commandButton>
+
+						<p:commandButton value="Cancel" 
+							update="" id="cancelZonaBtn" process="@this"
+							icon="ui-icon-cancel" action="#{zonaController.cancel}">
+							<p:resetInput target="" />
+						</p:commandButton>
+					</div>
+
+				</h:form>
+
+			</p:tab>
+		</p:tabView>
+
+
+	</p:panel>
+</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>

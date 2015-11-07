@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="domain.Ubicacion" table="ubicacion">
+		
+		<id name="id" column="UBICACION_ID" type="java.lang.Long">
+			<generator class="org.hibernate.id.enhanced.SequenceStyleGenerator"> 
+            	<param name="sequence_name">UBICACIONID_SEQUENCE</param>
+            	<param name="optimizer">none</param>
+            	<param name="increment_size">1</param> 
+         	</generator>
+			<!-- <generator class="native" /> -->
+		</id>
+		
+		
+		<property name="estado" type="org.hibernate.type.NumericBooleanType"/>
+		
+		<one-to-one name="mercaderia" class="domain.Mercaderia"
+			cascade="save-update"></one-to-one>
+		
+	
+	</class>	
+</hibernate-mapping>

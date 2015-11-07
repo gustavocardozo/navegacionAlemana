@@ -1,0 +1,30 @@
+body{
+
+}
+
+body div {
+	background-color: transparent !important;
+}
+
+#loginForm{
+	margin: 0px;
+}
+
+
+.panel-login{
+	text-align: center;
+	margin-top: 123px !important;
+    width: 500px;
+    background-color: white !important;
+    margin: auto;
+    }
+    
+    .panelGrid tr ,
+    .panelGrid tr td{
+        border: none !important;
+    }
+    
+    
+.menuButtonUser{
+	float: right;
+}

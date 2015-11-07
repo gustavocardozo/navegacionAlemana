@@ -1,0 +1,127 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Lista de Usuarios</title>
+	
+	<link rel="stylesheet" href="/navegacionAlemana/css/index.css"
+		type="text/css" />
+</h:head>
+
+<h:body>
+	<p:layout fullPage="true" id="layout-principal">
+		<p:layoutUnit position="center">
+
+	<h:form id="userListMsgForm">
+					<p:messages autoUpdate="false" id="userListMsg"
+						styleClass="msgErrorList" showDetail="false" showSummary="true"
+						closable="true" />
+	</h:form>
+				
+	<h:form id="userListForm">
+		<p:panel id="userDataTablePanel" widgetVar="userDataTablePanel"
+			closable="true" toggleable="true" closeSpeed="0"
+			styleClass="sin-border">
+
+			<p:outputLabel value="Lista de Usuarios"/>
+			<br/>
+			
+			<p:dataTable id="userDataTable" widgetVar="userDataTableVar"
+				var="user" value="#{userController.userList}"
+				paginatorAlwaysVisible="true" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} 
+					{PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15,20,25,50,100" rows="10"
+				selectionMode="single" selection="#{userController.selectedUser}"
+				lazy="false" stickyHeader="false"
+				resizableColumns="true"
+				emptyMessage="#{msg['msg.compound.noDataFound']}"
+				rowKey="#{user.id}"
+				scrollable="true" scrollWidth="100%" scrollHeight="100%"
+				styleClass="" >
+
+				<f:facet name="header">
+					<table class="no-border-table dis-table-header">
+						<tr>
+							<td>
+								<p:commandButton id="addtUser"
+									styleClass="Fleft LightButton" icon="ui-icon-plusthick"
+									process="@this" action="#{userController.add}"
+									title="#{msg['msg.security.button.tooltip.add.user']}"/>
+									
+								<p:commandButton id="editUser"
+									styleClass="Fleft LightButton" icon="ui-icon-pencil"
+									process="@this" disabled="#{userController.disabledEditOrDelete}"
+									action="#{userController.edit}"
+									title="#{msg['msg.security.button.tooltip.edit.user']}"/>
+									
+								<p:commandButton id="removeUser"
+									styleClass="Fleft LightButton" icon="ui-icon-trash"
+									process="@this" disabled="#{userController.disabledEditOrDelete}"
+									actionListener="#{userController.remove}"
+									title="#{msg['msg.security.button.tooltip.remove.user']}"/>
+									
+							</td>
+							<td class="ui-datatable ui-datatable-header"><h:outputText
+									value="#{msg['msg.security.datatable.title.user']}" /></td>
+							<td></td>
+						</tr>
+					</table>
+				</f:facet>
+
+				<p:ajax event="rowSelect" update="editUser removeUser" />
+				<p:ajax event="rowUnselect" update="editUser removeUser" />
+
+				<!-- USERNAME -->
+				<p:column headerText="Nombre de Usuario"  sortBy="#{user.userName}">
+					<h:outputText value="#{user.userName}" />
+				</p:column>
+
+				<!-- FIRST NAME -->
+				<p:column headerText="Nombre" sortBy="#{user.nombre}">
+					<h:outputText value="#{user.nombre}" />
+				</p:column>
+
+				<!-- LAST NAME -->
+				<p:column headerText="Apellido" sortBy="#{user.apellido}">
+					<h:outputText value="#{user.apellido}" />
+				</p:column>
+
+				<!-- DNI -->
+				<p:column headerText="DNI" sortBy="#{user.dni}">
+					<h:outputText value="#{user.dni}" />
+				</p:column>
+				
+				<!-- FECHA NAC -->
+				<p:column headerText="Fecha Nac" >
+					<h:outputText value="#{user.fechaNac}" />
+				</p:column>
+				
+				<!-- FECHA INGRESO -->
+				<p:column headerText="Fecha Ingreso" >
+					<h:outputText value="#{user.fechaIngreso}" />
+				</p:column>
+
+				<!-- FECHA EGRESO -->
+				<p:column headerText="Fecha Egreso" >
+					<h:outputText value="#{user.fechaEgreso}" />
+				</p:column>
+				
+				<!-- ACTIVO -->
+				<p:column headerText="Activo" sortBy="#{user.estado}" >
+					<h:outputText value="#{user.estado ? 'Si' : 'No'}" />
+				</p:column>
+				
+			</p:dataTable>
+			
+			
+			<p:commandButton id="volverIndex" action="home" process="@this" value="Inicio" />
+			
+		</p:panel>
+	</h:form>
+</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>

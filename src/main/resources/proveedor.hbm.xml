@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="domain.Proveedor" table="PROVEEDOR">
+		
+		<id name="id" column="PROVEEDOR_ID" type="java.lang.Long">
+			<generator class="native" />
+		</id>
+		
+		<property name="nombre" column="nombre" type="java.lang.String"/>
+		<property name="razonSocial" column="razonSocial" type="java.lang.String"/>
+		<property name="direccion" column="direccion" type="java.lang.String"/>
+		<property name="telefono" column="telefono" type="java.lang.String"/>		
+		<property name="email" column="email" type="java.lang.String"/>
+			
+	</class>	
+</hibernate-mapping>

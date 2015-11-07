@@ -1,0 +1,119 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Lista de Zonas</title>
+</h:head>
+
+<h:body>
+	<p:layout fullPage="true" id="layout-principal">
+		<p:layoutUnit position="center">
+
+	<h:form id="zonaListMsgForm">
+					<p:messages autoUpdate="false" id="zonaListMsg"
+						styleClass="msgErrorList" showDetail="false" showSummary="true"
+						closable="true" />
+	</h:form>
+				
+	<h:form id="zonaListForm">
+		<p:panel id="zonaDataTablePanel" widgetVar="zonaDataTablePanel"
+			closable="true" toggleable="true" closeSpeed="0"
+			styleClass="sin-border">
+
+			<p:outputLabel value="Lista de Zonas"/>
+			<br/>
+				
+			<p:dataTable id="zonaDataTable" widgetVar="zonaDataTableVar"
+				var="zona" value="#{zonaController.zonaList}"
+				paginatorAlwaysVisible="true" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} 
+					{PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15,20,25,50,100" rows="10"
+				resizableColumns="true"
+				selectionMode="single" selection="#{zonaController.selectedZona}"
+				lazy="false" stickyHeader="false"
+				emptyMessage="#{msg['msg.compound.noDataFound']}"
+				rowKey="#{zona.id}"
+				scrollable="true" scrollWidth="100%" scrollHeight="100%"
+				styleClass="" >
+
+				<f:facet name="header">
+					<table class="no-border-table dis-table-header">
+						<tr>
+							<td>
+								<p:commandButton id="addtzona"
+									styleClass="Fleft LightButton" icon="ui-icon-plusthick"
+									process="@this" action="#{zonaController.add}"
+									title="#{msg['msg.security.button.tooltip.add.zona']}"/>
+									
+								<p:commandButton id="editzona"
+									styleClass="Fleft LightButton" icon="ui-icon-pencil"
+									process="@this" disabled="#{null == zonaController.selectedZona}"
+									action="#{zonaController.edit}"
+									title="#{msg['msg.security.button.tooltip.edit.zona']}"/>
+									
+								<p:commandButton id="removezona"
+									styleClass="Fleft LightButton" icon="ui-icon-trash"
+									process="@this" disabled="#{null == zonaController.selectedZona}"
+									actionListener="#{zonaController.remove}"
+									title="#{msg['msg.security.button.tooltip.remove.zona']}"/>
+									
+							</td>
+							<td class="ui-datatable ui-datatable-header"><h:outputText
+									value="#{msg['msg.security.datatable.title.zona']}" /></td>
+							<td></td>
+						</tr>
+					</table>
+				</f:facet>
+
+				<p:ajax event="rowSelect" update="editzona removezona" />
+				<p:ajax event="rowUnselect" update="editzona removezona" />
+
+				<!-- Identificar -->
+				<p:column headerText="Identificar" sortBy="#{zona.id}">
+					<h:outputText value="#{zona.id}" />
+				</p:column>
+
+				<!-- NAME -->
+				<p:column headerText="Nombre" sortBy="#{zona.nombre}" >
+					<h:outputText value="#{zona.nombre}" />
+				</p:column>
+
+				<!-- capacidad -->
+				<p:column headerText="Capacidad" sortBy="#{zona.capacidad}" >
+					<h:outputText value="#{zona.capacidad}" />
+				</p:column>
+
+				<!-- categoria -->
+				<p:column headerText="Categoria" >
+					<h:outputText value="#{zona.categoria}" />
+				</p:column>
+				
+				<!-- peso -->
+				<p:column headerText="Peso" >
+					<h:outputText value="#{zona.peso}" />
+				</p:column>
+
+				<!-- temperatura -->
+				<p:column headerText="Temperatura" >
+					<h:outputText value="#{zona.temperatura}" />
+				</p:column>
+								
+				<!-- ACTIVO -->
+				<p:column headerText="Activo" sortBy="#{zona.estado}">
+					<h:outputText value="#{zona.estado ? 'Si' : 'No'}" />
+				</p:column>
+				
+			</p:dataTable>
+			
+			
+			<p:commandButton id="volverIndex" action="home" process="@this" value="Inicio" />
+			
+		</p:panel>
+	</h:form>
+</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>
