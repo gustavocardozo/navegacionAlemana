@@ -49,7 +49,12 @@
 									styleClass="Fleft LightButton" icon="ui-icon-transferthick-e-w"
 									process="@this" disabled="#{despacharMercaderiController.disabledDespachar}"
 									actionListener="#{despacharMercaderiController.despachar}"
-									title="Despachar mercaderia"/>
+									title="Despachar mercaderia">
+									
+									<p:confirm header="Confirmación"
+												message="¿Desea despachar la mercadería seleccionada?"
+												icon="ui-icon-alert" />
+									</p:commandButton>
 									
 							</td>
 							<td class="ui-datatable ui-datatable-header"><h:outputText
@@ -107,18 +112,18 @@
 				</p:column>
 
 				<!-- categoria -->
-				<p:column headerText="Categoria" filterBy="#{mercaderia.categoria}" filterMatchMode="contains">
-					<h:outputText value="#{mercaderia.categoria}" />
+				<p:column headerText="Categoria" filterBy="#{mercaderia.zona.categoria}" filterMatchMode="contains">
+					<h:outputText value="#{mercaderia.zona.categoria}" />
 				</p:column>
 				
 				<!-- peso -->
-				<p:column headerText="Peso" filterBy="#{mercaderia.peso}" filterMatchMode="contains">
-					<h:outputText value="#{mercaderia.peso}" />
+				<p:column headerText="Peso" filterBy="#{mercaderia.zona.peso}" filterMatchMode="contains">
+					<h:outputText value="#{mercaderia.zona.peso}" />
 				</p:column>
 
 				<!-- temperatura -->
-				<p:column headerText="Temperatura" filterBy="#{mercaderia.temperatura}" filterMatchMode="contains">
-					<h:outputText value="#{mercaderia.temperatura}" />
+				<p:column headerText="Temperatura" filterBy="#{mercaderia.zona.temperatura}" filterMatchMode="contains">
+					<h:outputText value="#{mercaderia.zona.temperatura}" />
 				</p:column>
 
 			</p:dataTable>
